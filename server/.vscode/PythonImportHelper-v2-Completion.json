@@ -1,0 +1,267 @@
+[
+    {
+        "label": "db",
+        "importPath": "db",
+        "description": "db",
+        "isExtraImport": true,
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "db",
+        "description": "db",
+        "isExtraImport": true,
+        "detail": "db",
+        "documentation": {}
+    },
+    {
+        "label": "sqlite3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlite3",
+        "description": "sqlite3",
+        "detail": "sqlite3",
+        "documentation": {}
+    },
+    {
+        "label": "MeetupModel",
+        "importPath": "models.meetupmodel",
+        "description": "models.meetupmodel",
+        "isExtraImport": true,
+        "detail": "models.meetupmodel",
+        "documentation": {}
+    },
+    {
+        "label": "Resource",
+        "importPath": "flask_restx",
+        "description": "flask_restx",
+        "isExtraImport": true,
+        "detail": "flask_restx",
+        "documentation": {}
+    },
+    {
+        "label": "fields",
+        "importPath": "flask_restx",
+        "description": "flask_restx",
+        "isExtraImport": true,
+        "detail": "flask_restx",
+        "documentation": {}
+    },
+    {
+        "label": "Api",
+        "importPath": "flask_restx",
+        "description": "flask_restx",
+        "isExtraImport": true,
+        "detail": "flask_restx",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Blueprint",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "MeetupsSchema",
+        "importPath": "schemas.meetupschemas",
+        "description": "schemas.meetupschemas",
+        "isExtraImport": true,
+        "detail": "schemas.meetupschemas",
+        "documentation": {}
+    },
+    {
+        "label": "ValidationError",
+        "importPath": "marshmallow",
+        "description": "marshmallow",
+        "isExtraImport": true,
+        "detail": "marshmallow",
+        "documentation": {}
+    },
+    {
+        "label": "Schema",
+        "importPath": "marshmallow",
+        "description": "marshmallow",
+        "isExtraImport": true,
+        "detail": "marshmallow",
+        "documentation": {}
+    },
+    {
+        "label": "fields",
+        "importPath": "marshmallow",
+        "description": "marshmallow",
+        "isExtraImport": true,
+        "detail": "marshmallow",
+        "documentation": {}
+    },
+    {
+        "label": "resources.meetup",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "resources.meetup",
+        "description": "resources.meetup",
+        "detail": "resources.meetup",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "MeetupModel",
+        "kind": 6,
+        "importPath": "models.meetupmodel",
+        "description": "models.meetupmodel",
+        "peekOfCode": "class MeetupModel(db.Model):\n    __tablename__ = \"Meetups\"\n    id_ = db.Column(db.Integer, primary_key=True)\n    title = db.Column(db.String(80))\n    subtitle = db.Column(db.String(80))\n    address = db.Column(db.String(80))\n    imageurl = db.Column(db.String(200))\n    email = db.Column(db.String(80))\n    @classmethod\n    def find_by_id(cls, this_id):",
+        "detail": "models.meetupmodel",
+        "documentation": {}
+    },
+    {
+        "label": "Meetup",
+        "kind": 6,
+        "importPath": "resources.meetup",
+        "description": "resources.meetup",
+        "peekOfCode": "class Meetup(Resource):\n    @classmethod\n    def get(cls):\n        return {\"meetups\": [_mu_schema.dump(mu) for mu in MeetupModel.find_all()]}\n    @api.expect(_meetup_model)\n    def post(self):\n        try:\n            data = _mu_schema.load(data=request.get_json())\n        except ValidationError as ve:\n            return {\"message\": ve.messages}, 404",
+        "detail": "resources.meetup",
+        "documentation": {}
+    },
+    {
+        "label": "MeetupModifyDatas",
+        "kind": 6,
+        "importPath": "resources.meetup",
+        "description": "resources.meetup",
+        "peekOfCode": "class MeetupModifyDatas(Resource):\n    def get(self, title: str):\n        mu = MeetupModel.find_by_title(title)\n        if not isinstance(mu, str):\n            return {\"message\": \"type value not valid expeted string\"}, 404\n        if mu:\n            return {\"message\": _mu_schema.dump(mu)}\n        return {\"message\": \"meetup not found\"}\n    def delete(self, title):\n        mu = MeetupModel.find_by_title(title)",
+        "detail": "resources.meetup",
+        "documentation": {}
+    },
+    {
+        "label": "bp",
+        "kind": 5,
+        "importPath": "resources.meetup",
+        "description": "resources.meetup",
+        "peekOfCode": "bp = Blueprint(\"api\", __name__, url_prefix=\"/api/1\")\napi = Api(bp, version=\"1.0\", title=\"Meetup API\", description=\"A simple Meetup API\")\n_meetup_model = api.model(\n    \"MeetupSchema\",\n    {\n        \"title\": fields.String,\n        \"subtitle\": fields.String,\n        \"address\": fields.String,\n        \"imageurl\": fields.String,\n        \"email\": fields.String,",
+        "detail": "resources.meetup",
+        "documentation": {}
+    },
+    {
+        "label": "api",
+        "kind": 5,
+        "importPath": "resources.meetup",
+        "description": "resources.meetup",
+        "peekOfCode": "api = Api(bp, version=\"1.0\", title=\"Meetup API\", description=\"A simple Meetup API\")\n_meetup_model = api.model(\n    \"MeetupSchema\",\n    {\n        \"title\": fields.String,\n        \"subtitle\": fields.String,\n        \"address\": fields.String,\n        \"imageurl\": fields.String,\n        \"email\": fields.String,\n    },",
+        "detail": "resources.meetup",
+        "documentation": {}
+    },
+    {
+        "label": "_meetup_model",
+        "kind": 5,
+        "importPath": "resources.meetup",
+        "description": "resources.meetup",
+        "peekOfCode": "_meetup_model = api.model(\n    \"MeetupSchema\",\n    {\n        \"title\": fields.String,\n        \"subtitle\": fields.String,\n        \"address\": fields.String,\n        \"imageurl\": fields.String,\n        \"email\": fields.String,\n    },\n)",
+        "detail": "resources.meetup",
+        "documentation": {}
+    },
+    {
+        "label": "_mu_schema",
+        "kind": 5,
+        "importPath": "resources.meetup",
+        "description": "resources.meetup",
+        "peekOfCode": "_mu_schema = MeetupsSchema()\n@api.route(\"/meetup\")\nclass Meetup(Resource):\n    @classmethod\n    def get(cls):\n        return {\"meetups\": [_mu_schema.dump(mu) for mu in MeetupModel.find_all()]}\n    @api.expect(_meetup_model)\n    def post(self):\n        try:\n            data = _mu_schema.load(data=request.get_json())",
+        "detail": "resources.meetup",
+        "documentation": {}
+    },
+    {
+        "label": "MeetupsSchema",
+        "kind": 6,
+        "importPath": "schemas.meetupschemas",
+        "description": "schemas.meetupschemas",
+        "peekOfCode": "class MeetupsSchema(Schema):\n    title = fields.Str(required=True)\n    subtitle = fields.Str(required=True)\n    address = fields.Str(required=True)\n    imageurl = fields.Str(required=True)\n    email = fields.Str(required=True)",
+        "detail": "schemas.meetupschemas",
+        "documentation": {}
+    },
+    {
+        "label": "create_tables",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    \n    app.run(port=5000, debug=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\napp.secret_key = \"keep calm\"\napp.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.secret_key",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.secret_key = \"keep calm\"\napp.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    ",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config[\"SQLALCHEMY_DATABASE_URI\"]",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    \n    app.run(port=5000, debug=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"]",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    \n    app.run(port=5000, debug=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config[\"PROPAGATE_EXCEPTIONS\"]",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    \n    app.run(port=5000, debug=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "db",
+        "description": "db",
+        "peekOfCode": "db = SQLAlchemy()",
+        "detail": "db",
+        "documentation": {}
+    }
+]
