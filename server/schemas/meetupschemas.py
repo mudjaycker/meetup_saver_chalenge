@@ -1,8 +1,6 @@
-from marshmallow import Schema, fields
+from ma import ma
+from models.meetupmodel import MeetupModel
 
-class MeetupsSchema(Schema):
-    title = fields.Str(required=True)
-    subtitle = fields.Str(required=True)
-    address = fields.Str(required=True)
-    imageurl = fields.Str(required=True)
-    email = fields.Str(required=True)
+class MeetupsSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = MeetupModel

@@ -34,17 +34,18 @@ class Meetup(Resource):
     def post(self):
         try:
 
-            data = _mu_schema.load(data=request.get_json())
+            meetup = _mu_schema.load(data=request.get_json())
             
             
         except ValidationError as ve:
             return {"message": ve.messages}, 404
 
-        if MeetupModel.find_by_title(data["title"]):
+        if MeetupModel.find_by_title(meetup.title):
             return {"message": "meetup already exist"}, 403
 
-        mu = MeetupModel(**data)
-        mu.save_to_db()
+
+        meetup.save_to_db()
+
 
         return {"message": "saved successfully", "datas": _mu_schema.dump(mu)}
 

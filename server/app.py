@@ -1,6 +1,7 @@
 from flask import Flask
 import resources.meetup as API
 from db import db
+from ma import ma
 
 app = Flask(__name__)
 app.secret_key = "keep calm"
@@ -14,5 +15,6 @@ def create_tables():
     db.create_all()
 
 if __name__ == "__main__":
-    db.init_app(app)    
+    db.init_app(app)
+    ma.init_app(app)
     app.run(port=5000, debug=True)
