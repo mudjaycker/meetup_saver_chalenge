@@ -1,4 +1,4 @@
-from ma import ma
+from instances.ma import ma
 from models.meetupmodel import MeetupModel
 
 class MeetupsSchema(ma.SQLAlchemyAutoSchema):

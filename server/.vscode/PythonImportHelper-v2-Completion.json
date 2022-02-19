@@ -1,18 +1,34 @@
 [
     {
-        "label": "db",
-        "importPath": "db",
-        "description": "db",
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
         "isExtraImport": true,
-        "detail": "db",
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Marshmallow",
+        "importPath": "flask_marshmallow",
+        "description": "flask_marshmallow",
+        "isExtraImport": true,
+        "detail": "flask_marshmallow",
         "documentation": {}
     },
     {
         "label": "db",
-        "importPath": "db",
-        "description": "db",
+        "importPath": "instances.db",
+        "description": "instances.db",
         "isExtraImport": true,
-        "detail": "db",
+        "detail": "instances.db",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "importPath": "instances.db",
+        "description": "instances.db",
+        "isExtraImport": true,
+        "detail": "instances.db",
         "documentation": {}
     },
     {
@@ -22,6 +38,14 @@
         "importPath": "sqlite3",
         "description": "sqlite3",
         "detail": "sqlite3",
+        "documentation": {}
+    },
+    {
+        "label": "MeetupModel",
+        "importPath": "models.meetupmodel",
+        "description": "models.meetupmodel",
+        "isExtraImport": true,
+        "detail": "models.meetupmodel",
         "documentation": {}
     },
     {
@@ -57,6 +81,14 @@
         "documentation": {}
     },
     {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "request",
         "importPath": "flask",
         "description": "flask",
@@ -81,6 +113,14 @@
         "documentation": {}
     },
     {
+        "label": "Response",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
         "label": "MeetupsSchema",
         "importPath": "schemas.meetupschemas",
         "description": "schemas.meetupschemas",
@@ -97,19 +137,19 @@
         "documentation": {}
     },
     {
-        "label": "Schema",
-        "importPath": "marshmallow",
-        "description": "marshmallow",
+        "label": "ma",
+        "importPath": "instances.ma",
+        "description": "instances.ma",
         "isExtraImport": true,
-        "detail": "marshmallow",
+        "detail": "instances.ma",
         "documentation": {}
     },
     {
-        "label": "fields",
-        "importPath": "marshmallow",
-        "description": "marshmallow",
+        "label": "ma",
+        "importPath": "instances.ma",
+        "description": "instances.ma",
         "isExtraImport": true,
-        "detail": "marshmallow",
+        "detail": "instances.ma",
         "documentation": {}
     },
     {
@@ -122,11 +162,38 @@
         "documentation": {}
     },
     {
-        "label": "SQLAlchemy",
-        "importPath": "flask_sqlalchemy",
-        "description": "flask_sqlalchemy",
+        "label": "CORS",
+        "importPath": "flask_cors",
+        "description": "flask_cors",
         "isExtraImport": true,
-        "detail": "flask_sqlalchemy",
+        "detail": "flask_cors",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "instances.db",
+        "description": "instances.db",
+        "peekOfCode": "db = SQLAlchemy()",
+        "detail": "instances.db",
+        "documentation": {}
+    },
+    {
+        "label": "ma",
+        "kind": 5,
+        "importPath": "instances.ma",
+        "description": "instances.ma",
+        "peekOfCode": "ma = Marshmallow()",
+        "detail": "instances.ma",
         "documentation": {}
     },
     {
@@ -143,7 +210,7 @@
         "kind": 6,
         "importPath": "resources.meetup",
         "description": "resources.meetup",
-        "peekOfCode": "class Meetup(Resource):\n    @classmethod\n    def get(cls):\n        return {\"meetups\": [_mu_schema.dump(mu) for mu in MeetupModel.find_all()]}\n    @api.expect(_meetup_model)\n    def post(self):\n        try:\n            data = _mu_schema.load(data=request.get_json())\n        except ValidationError as ve:\n            return {\"message\": ve.messages}, 404",
+        "peekOfCode": "class Meetup(Resource):\n    @classmethod\n    def get(cls):\n        return {\"meetups\": [_mu_schema.dump(mu) for mu in MeetupModel.find_all()]}, 200\n    @api.expect(_meetup_model)\n    def post(self):\n        try:\n            meetup = _mu_schema.load(data=request.get_json())\n        except ValidationError as ve:\n            return {\"message\": ve.messages}, 404",
         "detail": "resources.meetup",
         "documentation": {}
     },
@@ -188,7 +255,7 @@
         "kind": 5,
         "importPath": "resources.meetup",
         "description": "resources.meetup",
-        "peekOfCode": "_mu_schema = MeetupsSchema()\n@api.route(\"/meetup\")\nclass Meetup(Resource):\n    @classmethod\n    def get(cls):\n        return {\"meetups\": [_mu_schema.dump(mu) for mu in MeetupModel.find_all()]}\n    @api.expect(_meetup_model)\n    def post(self):\n        try:\n            data = _mu_schema.load(data=request.get_json())",
+        "peekOfCode": "_mu_schema = MeetupsSchema()\n@api.route(\"/meetup\")\nclass Meetup(Resource):\n    @classmethod\n    def get(cls):\n        return {\"meetups\": [_mu_schema.dump(mu) for mu in MeetupModel.find_all()]}, 200\n    @api.expect(_meetup_model)\n    def post(self):\n        try:\n            meetup = _mu_schema.load(data=request.get_json())",
         "detail": "resources.meetup",
         "documentation": {}
     },
@@ -197,7 +264,7 @@
         "kind": 6,
         "importPath": "schemas.meetupschemas",
         "description": "schemas.meetupschemas",
-        "peekOfCode": "class MeetupsSchema(Schema):\n    title = fields.Str(required=True)\n    subtitle = fields.Str(required=True)\n    address = fields.Str(required=True)\n    imageurl = fields.Str(required=True)\n    email = fields.Str(required=True)",
+        "peekOfCode": "class MeetupsSchema(ma.SQLAlchemyAutoSchema):\n    class Meta:\n        model = MeetupModel",
         "detail": "schemas.meetupschemas",
         "documentation": {}
     },
@@ -206,7 +273,7 @@
         "kind": 2,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "def create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    \n    app.run(port=5000, debug=True)",
+        "peekOfCode": "def create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)\n    ma.init_app(app)\n    app.run(port=5000, debug=True)",
         "detail": "app",
         "documentation": {}
     },
@@ -215,7 +282,16 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app = Flask(__name__)\napp.secret_key = \"keep calm\"\napp.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":",
+        "peekOfCode": "app = Flask(__name__)\ncors = CORS(app)\napp.secret_key = \"keep calm\"\napp.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "cors",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "cors = CORS(app)\napp.secret_key = \"keep calm\"\napp.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":",
         "detail": "app",
         "documentation": {}
     },
@@ -224,7 +300,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app.secret_key = \"keep calm\"\napp.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    ",
+        "peekOfCode": "app.secret_key = \"keep calm\"\napp.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)",
         "detail": "app",
         "documentation": {}
     },
@@ -233,7 +309,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    \n    app.run(port=5000, debug=True)",
+        "peekOfCode": "app.config[\"SQLALCHEMY_DATABASE_URI\"] = \"sqlite:///test.db\"\napp.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)\n    ma.init_app(app)",
         "detail": "app",
         "documentation": {}
     },
@@ -242,7 +318,7 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    \n    app.run(port=5000, debug=True)",
+        "peekOfCode": "app.config[\"SQLALCHEMY_TRACK_MODIFICATIONS\"] = False\napp.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)\n    ma.init_app(app)\n    app.run(port=5000, debug=True)",
         "detail": "app",
         "documentation": {}
     },
@@ -251,17 +327,8 @@
         "kind": 5,
         "importPath": "app",
         "description": "app",
-        "peekOfCode": "app.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)    \n    app.run(port=5000, debug=True)",
+        "peekOfCode": "app.config[\"PROPAGATE_EXCEPTIONS\"] = True\napp.register_blueprint(API.bp)\n@app.before_first_request\ndef create_tables():\n    db.create_all()\nif __name__ == \"__main__\":\n    db.init_app(app)\n    ma.init_app(app)\n    app.run(port=5000, debug=True)",
         "detail": "app",
-        "documentation": {}
-    },
-    {
-        "label": "db",
-        "kind": 5,
-        "importPath": "db",
-        "description": "db",
-        "peekOfCode": "db = SQLAlchemy()",
-        "detail": "db",
         "documentation": {}
     }
 ]

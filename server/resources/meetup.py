@@ -1,12 +1,13 @@
 from models.meetupmodel import MeetupModel
 from flask_restx import Resource, fields, Api
-from flask import request
+from flask import jsonify, request
 from schemas.meetupschemas import MeetupsSchema
 from marshmallow import ValidationError
 from flask import Blueprint
 
 
 bp = Blueprint("api", __name__, url_prefix="/api/1")
+
 
 api = Api(bp, version="1.0", title="Meetup API", description="A simple Meetup API")
 
@@ -28,26 +29,24 @@ _mu_schema = MeetupsSchema()
 class Meetup(Resource):
     @classmethod
     def get(cls):
-        return {"meetups": [_mu_schema.dump(mu) for mu in MeetupModel.find_all()]}
-    
+        return {"meetups": [_mu_schema.dump(mu) for mu in MeetupModel.find_all()]}, 200
+
     @api.expect(_meetup_model)
     def post(self):
         try:
 
             meetup = _mu_schema.load(data=request.get_json())
-            
-            
+
         except ValidationError as ve:
             return {"message": ve.messages}, 404
 
-        if MeetupModel.find_by_title(meetup.title):
+        if MeetupModel.find_by_title(meetup["title"]):
             return {"message": "meetup already exist"}, 403
 
+        meetup_data = MeetupModel(**meetup)
+        meetup_data.save_to_db()
 
-        meetup.save_to_db()
-
-
-        return {"message": "saved successfully", "datas": _mu_schema.dump(mu)}
+        return {"message": "saved successfully", "datas": _mu_schema.dump(meetup)}
 
     @api.expect(_meetup_model)
     def put(self):

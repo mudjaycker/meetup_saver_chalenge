@@ -1,4 +1,4 @@
-from db import db
+from instances.db import db
 import sqlite3
 
 
