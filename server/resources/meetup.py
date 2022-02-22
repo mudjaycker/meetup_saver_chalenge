@@ -7,8 +7,6 @@ from flask import Blueprint
 
 
 bp = Blueprint("api", __name__, url_prefix="/api/1")
-
-
 api = Api(bp, version="1.0", title="Meetup API", description="A simple Meetup API")
 
 _meetup_model = api.model(

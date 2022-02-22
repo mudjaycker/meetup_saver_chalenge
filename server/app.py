@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask
 import resources.meetup as API
 from instances.db import db
 from instances.ma import ma
@@ -17,8 +17,6 @@ app.secret_key = "keep calm"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["PROPAGATE_EXCEPTIONS"] = True
-
-
 app.register_blueprint(API.bp)
 
 @app.before_first_request

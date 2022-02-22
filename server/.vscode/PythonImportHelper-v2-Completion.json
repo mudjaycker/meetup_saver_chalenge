@@ -113,14 +113,6 @@
         "documentation": {}
     },
     {
-        "label": "Response",
-        "importPath": "flask",
-        "description": "flask",
-        "isExtraImport": true,
-        "detail": "flask",
-        "documentation": {}
-    },
-    {
         "label": "MeetupsSchema",
         "importPath": "schemas.meetupschemas",
         "description": "schemas.meetupschemas",
