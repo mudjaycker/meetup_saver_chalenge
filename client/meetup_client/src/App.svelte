@@ -15,7 +15,7 @@
             .catch((err) => console.log(err));
         console.log(meetups);
     };
-    getMeetUps();
+    getMeetUps(); 
 </script>
 
 <main>
@@ -28,6 +28,7 @@
                 email={meetup.email}
                 address={meetup.address}
                 imageurl={meetup.imageurl}
+                id={meetup.id_}
             />
         {/each}
     </div>
